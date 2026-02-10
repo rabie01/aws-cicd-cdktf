@@ -13,13 +13,13 @@ try {
 
   const stack = new TerraformStack(app, 'turbovets');
 
-   // 2. Add S3 Backend Configuration right here
+   // S3 Backend Configuration
   new S3Backend(stack, {
   bucket: config.bucketName,
   key: config.stateKey,
   region: config.awsRegion,
   encrypt: true,
-  // This enables the new native S3 locking (no DynamoDB needed)
+  // This enables the new native S3 locking (no DynamoDB needed), used this override bc not yet natively supported in cdktf
   // use_lockfile: true, 
 }).addOverride('use_lockfile', true);
 
